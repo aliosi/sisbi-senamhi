@@ -1,0 +1,106 @@
+<section class="container-fluid">
+  <br>
+  <button mat-icon-button type="button"
+          class="atras" (click)="retornar()">
+    <fa-icon [icon]="faArrowLeft" size="2x"></fa-icon>
+  </button>
+<!--  {{cargaform}}-->
+  <p *ngIf="!cargaform" style="color: #b3c8ea">Espere un momento por favor</p>
+  <mat-progress-bar *ngIf="!cargaform"
+                    mode="buffer">
+  </mat-progress-bar>
+  <form *ngIf="cargaform" class="example-form" [formGroup]="form" (ngSubmit)="save()">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <span *ngIf="isNew">Nueva subcategoría</span>
+          <span *ngIf="!isNew">Editar subcategoría</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Codigo" formControlName="id" matInput type="text">
+              <div class="messages" *ngIf="idField.touched && idField.invalid">
+                <mat-error *ngIf="idField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+                <mat-error *ngIf="idField.hasError('pattern')">
+                  Este campo debe ser de tipo numérico y debe tener como mínimo 4 dígitos
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Descipción" formControlName="descripcion" matInput type="text">
+              <div class="messages" *ngIf="descripcionField.touched && descripcionField.invalid">
+                <mat-error *ngIf="descripcionField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input type="text"
+                     placeholder="Mayor"
+                     aria-label="Number"
+                     formControlName="mayor"
+                     matInput
+                     [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+              <div class="messages" *ngIf="mayorField.touched && mayorField.invalid">
+                <mat-error *ngIf="mayorField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+                <mat-error *ngIf="mayorField.hasError('pattern')">
+                  Este campo debe ser de tipo numérico, debe tener como mínimo 3 y como máximo 10 dígitos
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Fecha de registro"
+                     formControlName="fech_reg"
+                     matInput type="text"
+                     disabled>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+            <mat-select [disabled]="disableSelect.value" formControlName="estado">
+              <mat-option value="1">Activo</mat-option>
+              <mat-option value="0">Inactivo</mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-progress-bar *ngIf="hidebutoon"
+                          mode="indeterminate">
+        </mat-progress-bar>
+        <button *ngIf="!hidebutoon"
+                mat-raised-button
+                type="submit"
+                class="blue-senamhi">
+          <span *ngIf="isNew">Crear</span>
+          <span *ngIf="!isNew">Guardar</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</section>

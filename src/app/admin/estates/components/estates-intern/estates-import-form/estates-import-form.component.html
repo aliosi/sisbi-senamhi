@@ -1,0 +1,73 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <span>Registro masivo</span>
+    </mat-card-title>
+  </mat-card-header>
+  <form class="example-form" [formGroup]="formulario">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-xs">
+          <br>
+          <!-- Sede Column -->
+          <form class="example-form" [formGroup]="formobj">
+
+            <div class="col-xs">
+              <mat-form-field>
+                <mat-select placeholder="Sede"
+                            [compareWith]="compareObjects"
+                            formControlName="sede">
+                  <mat-option *ngFor="let item of filteredSedes" [value]="item">
+                    {{item.descripcion}}
+                  </mat-option>
+                </mat-select>
+                <div class="messages" *ngIf="sedeformobjs.touched && sedeformobjs.invalid">
+                  <mat-error *ngIf="sedeformobjs.hasError('required')">
+                    Este campo es requerido
+                  </mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+
+          </form>
+          <mat-label>Archivo excel:</mat-label>
+          <br>
+          <div class="button-wrapper">
+            <button mat-raised-button>
+              <mat-icon>folder</mat-icon>
+              Seleccione un archivo
+            </button>
+            <span>{{namefile}}</span>
+            <input
+              (change)="onFileChange($event)"
+              formControlName="inputfile"
+              id="upload-file"
+              name="file"
+              class="file-archivo"
+              type="file"
+              accept=".xlsx, .xls ">
+
+          </div>
+
+          <div *ngIf="inputfileformulatio.touched && inputfileformulatio.invalid" class="messages">
+            <mat-error *ngIf="inputfileformulatio.hasError('required')">
+              Este campo es requerido
+            </mat-error>
+          </div>
+          <!--          pruebs-->
+<!--  {{hidebutoon.value}}-->
+
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="hidebutoon.value" (click)="grabar()">Enviar</button>
+      <p *ngIf="hidebutoon.value && !formulario.invalid" style="color: #b3c8ea">Procesando ... Espere un momento por favor</p>
+      <mat-progress-bar *ngIf="hidebutoon.value"
+                        mode="indeterminate">
+      </mat-progress-bar>
+    </mat-card-actions>
+  </form>
+</mat-card>
+
+
