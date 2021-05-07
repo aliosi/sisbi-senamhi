@@ -1,0 +1,277 @@
+<section class="container">
+  <br>
+  <button mat-icon-button type="button"
+          class="atras" (click)="retornar()">
+    <fa-icon [icon]="faArrowLeft" size="2x"></fa-icon>
+  </button>
+  <p *ngIf="!cargaform" style="color: #b3c8ea">Espere un momento por favor</p>
+  <mat-progress-bar *ngIf="!cargaform"
+                    mode="buffer">
+  </mat-progress-bar>
+  <form *ngIf="cargaform" class="example-form" [formGroup]="form" (ngSubmit)="save()">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <span *ngIf="isNew">Nuevo bien interno</span>
+          <span *ngIf="!isNew">Editar bien interno</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- Código Patrimonial Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Código Patrimonial" formControlName="codPatrimonio" matInput type="text">
+              <div class="messages" *ngIf="codPatrimonioField.touched && codPatrimonioField.invalid">
+                <mat-error *ngIf="codPatrimonioField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Descipción Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Descipción" formControlName="descripcion" matInput type="text">
+              <div class="messages" *ngIf="descripcionField.touched && descripcionField.invalid">
+                <mat-error *ngIf="descripcionField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Marca Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <mat-select placeholder="Marca"
+                          formControlName="marca"
+                          [compareWith]="compareObjects"
+                          (ngModelChange)="cargarmodelos()">
+                <mat-select-filter [placeholder]="'Ingrese la marca'"
+                                   [displayMember]="'descripcion'"
+                                   [array]="marcas"
+                                   (filteredReturn)="filteredMarcas =$event"
+                >
+                </mat-select-filter>
+                <mat-option *ngFor="let item of filteredMarcas" [value]="item">
+                  {{item.descripcion}}
+                </mat-option>
+              </mat-select>
+              <div class="messages" *ngIf="marcaField.touched && marcaField.invalid">
+                <mat-error *ngIf="marcaField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Modelo Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <mat-select placeholder="Modelo"
+                          [compareWith]="compareObjects"
+                          formControlName="modelo">
+                <mat-select-filter [placeholder]="'Ingrese el modelo'"
+                                   [displayMember]="'descripcion'"
+                                   [array]="modelos"
+                                   (filteredReturn)="filteredModelos =$event"
+                >
+                </mat-select-filter>
+                <mat-option *ngFor="let item of filteredModelos" [value]="item">
+                  {{item.descripcion}}
+                </mat-option>
+              </mat-select>
+              <div class="messages" *ngIf="modeloField.touched && modeloField.invalid">
+                <mat-error *ngIf="modeloField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- nSerie Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Numero de serie"
+                     matInput type="text" formControlName="nSerie">
+              <div class="messages" *ngIf="nNeaField.touched && nNeaField.invalid">
+                <mat-error *ngIf="nNeaField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- nOrden Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Numero de orden"
+                     formControlName="nOrden"
+                     matInput type="text"
+                     [disabled]="disableedit">
+              <div class="messages" *ngIf="nOrdenField.touched && nOrdenField.invalid">
+                <mat-error *ngIf="nOrdenField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Fecha orden Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Fecha de orden" formControlName="fechOrden" [disabled]="disableedit" matInput
+                     type="date">
+              <div class="messages" *ngIf="fechOrdenField.touched && fechOrdenField.invalid">
+                <mat-error *ngIf="fechOrdenField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- nNea Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Numero Nea"
+                     formControlName="nNea"
+                     [disabled]="disableedit"
+                     matInput type="text"
+              >
+              <div class="messages" *ngIf="nNeaField.touched && nNeaField.invalid">
+                <mat-error *ngIf="nNeaField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Fecha nea Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Fecha Nea" formControlName="fechNea" [disabled]="disableedit" matInput type="date">
+              <div class="messages" *ngIf="fechNeaField.touched && fechNeaField.invalid">
+                <mat-error *ngIf="fechNeaField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Subcategoría Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <mat-select placeholder="Sub-categoría"
+                          [compareWith]="compareObjects"
+                          formControlName="subCategoria">
+                <mat-select-filter [placeholder]="'Ingrese la subcategoría'"
+                                   [displayMember]="'subCategoria'"
+                                   [array]="subcategory"
+                                   (filteredReturn)="filteredSubcategory =$event"
+                >
+                </mat-select-filter>
+                <mat-option *ngFor="let item of filteredSubcategory" [value]="item">
+                  {{item.descripcion}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Sede Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <mat-select placeholder="Sede"
+                          [compareWith]="compareObjects"
+                          formControlName="sede">
+                <mat-select-filter [placeholder]="'Ingrese la sede'"
+                                   [displayMember]="'sede'"
+                                   [array]="sedes"
+                                   (filteredReturn)="filteredSedes =$event"
+                >
+                </mat-select-filter>
+                <mat-option *ngFor="let item of filteredSedes" [value]="item">
+                  {{item.descripcion}}
+                </mat-option>
+              </mat-select>
+              <div class="messages" *ngIf="sedeField.touched && sedeField.invalid">
+                <mat-error *ngIf="sedeField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Fecha de alta Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Fecha de alta" formControlName="fechAlta" [disabled]="disableedit" matInput
+                     type="date">
+              <div class="messages" *ngIf="fechAltaField.touched && fechAltaField.invalid">
+                <mat-error *ngIf="fechAltaField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Fecha movimiento Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Fecha de movimiento" formControlName="fechMovimiento" [disabled]="disableedit"
+                     matInput type="date">
+              <div class="messages" *ngIf="fechMovimientoField.touched && fechMovimientoField.invalid">
+                <mat-error *ngIf="fechMovimientoField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Color-->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Color" formControlName="color"
+                     matInput type="text">
+            </mat-form-field>
+          </div>
+        </div>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-progress-bar *ngIf="hidebutoon"
+                          mode="indeterminate">
+        </mat-progress-bar>
+        <button *ngIf="!hidebutoon"
+                mat-raised-button
+                type="submit"
+                class="blue-senamhi">
+          <span *ngIf="isNew">Crear</span>
+          <span *ngIf="!isNew">Guardar</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</section>
+
+

@@ -1,0 +1,151 @@
+/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* For use in src/lib/core/theming/_palette.scss */
+.brown-senamhi {
+  color: white;
+  background-color: #A67C52;
+  border-color: #A67C52;
+}
+
+.yellow-senamhi {
+  color: white;
+  background: #FFC600;
+  border-color: #FFC600;
+}
+
+.yellow-senamhi:hover {
+  color: white;
+  background: #f8d868;
+  border-color: #fcd967;
+}
+
+.blue-senamhi {
+  color: white;
+  border-color: #0047BA;
+  background-color: #0047BA;
+}
+
+.blue-senamhi:hover {
+  color: white;
+  border-color: #547ec3;
+  background-color: #557dc8;
+  display: block;
+}
+
+.blue-light-senamhi {
+  color: white;
+  background-color: #7487c4;
+  background: #7185bf;
+}
+
+.blue-light-senamhi:hover {
+  color: white;
+  background-color: #98ace3;
+  background: #90a1d7;
+}
+
+.greeen {
+  color: white;
+  background: green;
+  background-color: green;
+}
+
+.white {
+  color: black;
+  background-color: white;
+  background: white;
+}
+
+.white:hover {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.45);
+  background: #ffffff73;
+}
+
+.greeen:hover {
+  color: white;
+  background: #0d620d;
+  background-color: #0a620a;
+}
+
+.btn:hover {
+  color: #fdfeff;
+  text-decoration: none;
+}
+
+.label-blue {
+  background-color: #0047BA;
+  color: #ffffff;
+}
+
+.label-warning {
+  background-color: #FFC600;
+  color: black;
+}
+
+.label-brown {
+  background-color: #A67C52;
+  color: #fdfdfd;
+}
+
+//.label-primary {
+//  background-color: #0047BA;
+//}
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.atras {
+  display: list-item;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.example-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.mat-mini-fab.mat-warn {
+  background-color: #a67c52;
+}
+
+
+
+
