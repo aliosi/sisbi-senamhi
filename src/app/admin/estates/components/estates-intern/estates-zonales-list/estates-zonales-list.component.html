@@ -1,0 +1,139 @@
+<section>
+  <br>
+  <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle mat-raised-button (click)="exportExcel()" [disabled]="exceldisable" value="underline"
+                       class="blue-light-senamhi">
+      <span *ngIf="!exceldisable">
+              Exportar
+      </span>
+      <!--      <mat-icon class="setDefaultFontSetClass" *ngIf="!exceldisable">file-excel</mat-icon>-->
+      <fa-icon [icon]="faExcel"></fa-icon>
+      <span *ngIf="exceldisable"> Exportando ...</span>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+<section>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Listado de bienes internos</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event)" placeholder="BUSCAR" #input>
+      </mat-form-field>
+      <p *ngIf="cargaform" style="color: #b3c8ea">Espere un momento por favor</p>
+      <mat-progress-bar *ngIf="cargaform"
+                        mode="buffer">
+      </mat-progress-bar>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSortActive="id" id="tableinternos" *ngIf="!cargaform"
+               matSortDirection="desc"
+               matSort>
+          <!-- Nro Column -->
+          <ng-container matColumnDef="nro">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nro</th>
+            <td mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </td>
+          </ng-container>
+          <!-- ID Column -->
+          <ng-container matColumnDef="sede">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> SEDE</th>
+            <td mat-cell *matCellDef="let row"> {{row.descsede}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="marca">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> MARCA</th>
+            <td mat-cell *matCellDef="let row"> {{row.descmarca}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="modelo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> MODELO</th>
+            <td mat-cell *matCellDef="let row"> {{row.descmodelo}} </td>
+          </ng-container>
+
+          <!-- Descripcion Administrado -->
+          <!--          <ng-container matColumnDef="administrado" style="width: 2px">-->
+          <!--            <th mat-header-cell *matHeaderCellDef mat-sort-header> Administrado</th>-->
+          <!--            <td mat-cell *matCellDef="let row"> {{row.administrado}} </td>-->
+          <!--          </ng-container>-->
+
+          <!-- Codigo patrimonial  -->
+          <ng-container matColumnDef="codpatrimonio" style="width: 2px">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo patrimonial</th>
+            <td mat-cell *matCellDef="let row"> {{row.codPatrimonio}} </td>
+          </ng-container>
+
+          <!-- Descripcion Convenio -->
+          <!--          <ng-container matColumnDef="convenio">-->
+          <!--            <th mat-header-cell *matHeaderCellDef mat-sort-header> Convenio</th>-->
+          <!--            <td mat-cell *matCellDef="let row"> {{row.convenio}} </td>-->
+          <!--          </ng-container>-->
+
+          <!-- Descripcion Column -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion</th>
+            <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
+          </ng-container>
+
+          <!-- nSerie Column -->
+          <ng-container matColumnDef="nSerie">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero de serie</th>
+            <td mat-cell *matCellDef="let row"> {{row.nSerie}} </td>
+          </ng-container>
+
+          <!-- Sede Column -->
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let row">
+              <span *ngIf="row.estadoSolicitud==='CONFORME'" class="label label-brown">{{row.estadoSolicitud}}</span>
+              <span *ngIf="row.estadoSolicitud==='PENDIENTE'" class="label label-warning">{{row.estadoSolicitud}}</span>
+            </td>
+          </ng-container>
+
+          <!-- Acciones Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let row">
+              <!--              <mat-button-group>-->
+              <!--              <button mat-mini-fab color="accent"-->
+              <!--                      #tooltip="matTooltip"-->
+              <!--                      matTooltip="Editar fila"-->
+              <!--                      *ngIf="rol==='22' || rol==='21'"-->
+              <!--                      [routerLink]="['editar',row.id]">-->
+              <!--                <fa-icon [icon]="faEditar"></fa-icon>-->
+              <!--              </button>-->
+              <!--                      [routerLink]="['solicitud',row.id]"-->
+              <button *ngIf="rol==='23' || rol==='21'" mat-mini-fab color="accent"
+                      #tooltip="matTooltip"
+                      matTooltip="Solicitar cambio"
+                      [routerLink]="['../solicitud',row.id]"
+              >
+                <fa-icon [icon]="faEditar"></fa-icon>
+              </button>
+              <!--                <button mat-mini-fab color="warn"-->
+              <!--                        #tooltip="matTooltip"-->
+              <!--                        matTooltip="Elimar fila"-->
+              <!--                       >-->
+              <!--                  <fa-icon [icon]="faEliminar"></fa-icon>-->
+              <!--                </button>-->
+              <!--              </mat-button-group>-->
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+
+        <mat-paginator #paginator
+                       [length]="dataSource?.data.length"
+                       [pageIndex]="0"
+                       [pageSize]="10"
+                       [pageSizeOptions]="[10,10, 25, 50, 100, 250]">
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+
+

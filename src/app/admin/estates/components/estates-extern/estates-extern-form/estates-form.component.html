@@ -1,0 +1,202 @@
+<section class="container">
+  <br>
+  <button mat-icon-button type="button"
+          class="atras" (click)="retornar()">
+    <fa-icon [icon]="faArrowLeft" size="2x"></fa-icon>
+  </button>
+  <p *ngIf="!formactive" style="color: #b3c8ea">Espere un momento por favor</p>
+  <mat-progress-bar *ngIf="!formactive"
+                    mode="buffer">
+  </mat-progress-bar>
+  <form *ngIf="formactive" class="example-form" [formGroup]="form" (ngSubmit)="save()">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <span *ngIf="isNew">Nuevo bien externo</span>
+          <span *ngIf="!isNew">Editar bien externo</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+
+        <!-- Descipción Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Descipción" formControlName="descripcion" matInput type="text">
+              <div class="messages" *ngIf="descripcionField.touched && descripcionField.invalid">
+                <mat-error *ngIf="descripcionField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Marca Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <mat-select placeholder="Marca"
+                          formControlName="marca"
+                          [compareWith]="compareObjects"
+                          (ngModelChange)="cargarmodelos()">
+                <mat-select-filter [placeholder]="'Ingrese la marca'"
+                                   [displayMember]="'descripcion'"
+                                   [array]="marcas"
+                                   (filteredReturn)="filteredMarcas =$event"
+                >
+                </mat-select-filter>
+                <mat-option *ngFor="let item of filteredMarcas" [value]="item">
+                  {{item.descripcion}}
+                </mat-option>
+              </mat-select>
+              <div class="messages" *ngIf="marcaField.touched && marcaField.invalid">
+                <mat-error *ngIf="marcaField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+            <!--            <p>Selected: {{carControl.value}}</p>-->
+            <!--            <mat-form-field class="example-full-width">-->
+            <!--              <input placeholder="Marca"-->
+            <!--                     formControlName="marca"-->
+            <!--                     matInput type="text"-->
+            <!--                     disabled>-->
+            <!--            </mat-form-field>-->
+          </div>
+        </div>
+        <!-- Modelo Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <mat-select placeholder="Modelo"
+                          [compareWith]="compareObjects"
+                          formControlName="modelo">
+                <mat-select-filter [placeholder]="'Ingrese el modelo'"
+                                   [displayMember]="'descripcion'"
+                                   [array]="modelos"
+                                   (filteredReturn)="filteredModelos =$event"
+                >
+                </mat-select-filter>
+                <mat-option *ngFor="let item of filteredModelos" [value]="item">
+                  {{item.descripcion}}
+                </mat-option>
+              </mat-select>
+              <div class="messages" *ngIf="modeloField.touched && modeloField.invalid">
+                <mat-error *ngIf="modeloField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- nSerie Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="example-full-width">
+              <input placeholder="Numero de serie"
+                     formControlName="nSerie"
+                     matInput type="text"
+              >
+              <div class="messages" *ngIf="nNeaField.touched && nNeaField.invalid">
+                <mat-error *ngIf="nNeaField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Sede Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <mat-select placeholder="Sede"
+                          [compareWith]="compareObjects"
+                          formControlName="sede">
+                <mat-select-filter [placeholder]="'Ingrese la sede'"
+                                   [displayMember]="'sede'"
+                                   [array]="sedes"
+                                   (filteredReturn)="filteredSedes =$event"
+                >
+                </mat-select-filter>
+                <mat-option *ngFor="let item of filteredSedes" [value]="item">
+                  {{item.descripcion}}
+                </mat-option>
+              </mat-select>
+              <div class="messages" *ngIf="sedeField.touched && sedeField.invalid">
+                <mat-error *ngIf="sedeField.hasError('required')">
+                  Este campo es requerido
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Convenio Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <mat-select placeholder="Convenio"
+                          [compareWith]="compareObjects"
+                          formControlName="convenio">
+                <mat-select-filter [placeholder]="'Ingrese el convenio'"
+                                   [displayMember]="'convenio'"
+                                   [array]="convenio"
+                                   (filteredReturn)="filteredConvenio =$event"
+                >
+                </mat-select-filter>
+                <mat-option *ngFor="let item of filteredConvenio" [value]="item">
+                  {{item.descripcion}}
+                </mat-option>
+              </mat-select>
+              <!--              <div class="messages" *ngIf="convenioField.touched && convenioField.invalid">-->
+              <!--                <mat-error *ngIf="convenioField.hasError('required')">-->
+              <!--                  Este campo es requerido-->
+              <!--                </mat-error>-->
+              <!--              </div>-->
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Administrado Column -->
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field>
+              <mat-select placeholder="Administrado"
+                          [compareWith]="compareObjects"
+                          formControlName="administrado">
+                <mat-select-filter [placeholder]="'Ingrese el administrado'"
+                                   [displayMember]="'administrado'"
+                                   [array]="administrado"
+                                   (filteredReturn)="filteredAdministrado =$event"
+                >
+                </mat-select-filter>
+                <mat-option *ngFor="let item of filteredAdministrado" [value]="item">
+                  {{item.descripcion}}
+                </mat-option>
+              </mat-select>
+              <!--              <div class="messages" *ngIf="administradoField.touched && administradoField.invalid">-->
+              <!--                <mat-error *ngIf="administradoField.hasError('required')">-->
+              <!--                  Este campo es requerido-->
+              <!--                </mat-error>-->
+              <!--              </div>-->
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-progress-bar *ngIf="hidebutoon"
+                          mode="indeterminate">
+        </mat-progress-bar>
+        <button *ngIf="!hidebutoon"
+                mat-raised-button
+                type="submit"
+                class="blue-senamhi">
+          <span *ngIf="isNew">Crear</span>
+          <span *ngIf="!isNew">Guardar</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</section>
+
+

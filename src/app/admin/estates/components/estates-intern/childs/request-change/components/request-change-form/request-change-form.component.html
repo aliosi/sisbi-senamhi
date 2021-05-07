@@ -1,0 +1,279 @@
+<section class="container">
+  <br>
+  <button *ngIf="isNewsolicitud" mat-icon-button type="button"
+          class="atras" (click)="retornar()">
+    <fa-icon [icon]="faArrowLeft" size="2x"></fa-icon>
+  </button>
+  <button *ngIf="!isNewsolicitud" mat-icon-button type="button"
+          class="atras" (click)="retornarsoli()">
+    <fa-icon [icon]="faArrowLeft" size="2x"></fa-icon>
+  </button>
+  <p *ngIf="!cargaform" style="color: #b3c8ea">Espere un momento por favor</p>
+  <mat-progress-bar *ngIf="!cargaform"
+                    mode="buffer">
+  </mat-progress-bar>
+  <div *ngIf="cargaform">
+    <form class="example-form" [formGroup]="form" (ngSubmit)="save()">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <span *ngIf="isNewsolicitud">Nueva solicitud</span>
+            <span *ngIf="!isNewsolicitud">Validar solicitud</span>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <p *ngIf="isNewsolicitud" class="noti">
+            Para realizar algun cambio debe ingresar la evidencia respectiva del cambio, posteriormente
+            <b>PATRIMONIO deberá dar la confirmación.</b>
+            Para ello se comunicarán con usted.
+          </p>
+
+          <div *ngIf="isNewsolicitud" class="row">
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput disabled placeholder="Codigo patrimonial" type="text"
+                       [value]="codPatrimonioField.value">
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          <!-- Descipción Column -->
+          <div *ngIf="isNewsolicitud" class="row">
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput disabled placeholder="Descipción" [value]="descripcionField.value">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div *ngIf="isNewsolicitud" class="row">
+            <div class="col-xs">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" disabled placeholder="N° Serie actual" [value]="nSerieField.value">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Marca Column -->
+          <div *ngIf="isNewsolicitud" class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <mat-select placeholder="Marca actual"
+                            formControlName="marca"
+                            [disabled]="true"
+                            (ngModelChange)="cargarmodelos()"
+                            [compareWith]="compareObjects"
+                >
+                  <mat-select-filter [placeholder]="'Ingrese la marca'"
+                                     [displayMember]="'descripcion'"
+                                     [array]="marcas"
+                                     (filteredReturn)="filteredMarcas =$event"
+                  >
+                  </mat-select-filter>
+                  <mat-option *ngFor="let item of filteredMarcas" [value]="item">
+                    {{item.descripcion}}
+                  </mat-option>
+                </mat-select>
+                <div class="messages" *ngIf="marcaField.touched && marcaField.invalid">
+                  <mat-error *ngIf="marcaField.hasError('required')">
+                    Este campo es requerido
+                  </mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Modelo Column -->
+          <div *ngIf="isNewsolicitud" class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <mat-select placeholder="Modelo actual"
+                            disabled
+                            [compareWith]="compareObjects"
+                            formControlName="modelo">
+                  <mat-select-filter [placeholder]="'Ingrese el modelo'"
+                                     [displayMember]="'descripcion'"
+                                     [array]="modelos"
+                                     (filteredReturn)="filteredModelos =$event"
+                  >
+                  </mat-select-filter>
+                  <mat-option *ngFor="let item of filteredModelos" [value]="item">
+                    {{item.descripcion}}
+                  </mat-option>
+                </mat-select>
+                <div class="messages" *ngIf="modeloField.touched && modeloField.invalid">
+                  <mat-error *ngIf="modeloField.hasError('required')">
+                    Este campo es requerido
+                  </mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!--        Solicitud de cambio-->
+          <!--        marca-->
+
+          <form class="example-form" [formGroup]="formsolicitud">
+            <div class="row">
+              <div class="col-xs">
+                <mat-form-field>
+                  <mat-select placeholder="Marca"
+                              formControlName="marca"
+                              [disabled]="disableedit"
+                              (ngModelChange)="cargarmodelos()"
+                              [compareWith]="compareObjects">
+                    <mat-select-filter [placeholder]="'Ingrese la marca'"
+                                       [displayMember]="'descripcion'"
+                                       [array]="marcas"
+
+                                       (filteredReturn)="filteredMarcas =$event"
+                    >
+                    </mat-select-filter>
+                    <mat-option *ngFor="let item of filteredMarcas" [value]="item">
+                      {{item.descripcion}}
+                    </mat-option>
+                  </mat-select>
+                  <div class="messages" *ngIf="marcasolicitudField.touched && marcasolicitudField.invalid">
+                    <mat-error *ngIf="marcasolicitudField.hasError('required')">
+                      Este campo es requerido
+                    </mat-error>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- Modelo Column -->
+            <div class="row">
+              <div class="col-xs">
+                <mat-form-field>
+                  <mat-select placeholder="Modelo"
+                              [compareWith]="compareObjects"
+                              [disabled]="disableedit"
+                              formControlName="modelo">
+                    <mat-select-filter [placeholder]="'Ingrese el modelo'"
+                                       [displayMember]="'descripcion'"
+                                       [array]="modelos"
+                                       (filteredReturn)="filteredModelos =$event"
+                    >
+                    </mat-select-filter>
+                    <mat-option *ngFor="let item of filteredModelos" [value]="item">
+                      {{item.descripcion}}
+                    </mat-option>
+                  </mat-select>
+                  <div class="messages" *ngIf="modelosolicitudField.touched && modelosolicitudField.invalid">
+                    <mat-error *ngIf="modelosolicitudField.hasError('required')">
+                      Este campo es requerido
+                    </mat-error>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- nSerie Column -->
+            <div *ngIf="isNewsolicitud" class="row">
+              <div class="col-xs">
+                <mat-form-field class="example-full-width">
+                  <input placeholder="Numero de serie"
+                         matInput type="text" formControlName="nSerie">
+                  <div class="messages" *ngIf="nSeriesolicitudField.touched && nSeriesolicitudField.invalid">
+                    <mat-error *ngIf="nSeriesolicitudField.hasError('required')">
+                      Este campo es requerido
+                    </mat-error>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div *ngIf="!isNewsolicitud">
+              <div class="row">
+                <div class="col-xs">
+                  <mat-form-field class="example-full-width">
+                    <input matInput disabled placeholder="Descipción" [value]="nSeriesolicitudField.value">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <!--        Comentario-->
+            <div *ngIf="isNewsolicitud" class="row">
+              <div class="col-xs">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Comentario</mat-label>
+                  <textarea matInput formControlName="comentario" placeholder="Ingrese su comentario..."></textarea>
+                  <div class="messages" *ngIf="comentariosolicitudField.touched && comentariosolicitudField.invalid">
+                    <mat-error *ngIf="comentariosolicitudField.hasError('required')">
+                      Este campo es requerido
+                    </mat-error>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+            <div *ngIf="!isNewsolicitud" class="row">
+              <div class="col-xs">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Comentario</mat-label>
+                  <textarea matInput disabled [value]="comentariosolicitudField.value"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!--     Imagen-->
+            <div class="row">
+              <div class="col-xs">
+                <mat-label>Evidencia</mat-label>
+                <br>
+                <div class="button-wrapper">
+                  <button *ngIf="isNewsolicitud" mat-raised-button>
+                    <mat-icon>folder</mat-icon>
+                    Seleccione un archivo
+                  </button>
+                  <span>{{namefile}}</span>
+                  <input *ngIf="isNewsolicitud"
+                         (change)="onFileChange($event)"
+                         id="upload-file"
+                         placeholder="Ingrese su comentario..." #file type="file"
+                         accept=".jpg,.jpeg, .png">
+                </div>
+
+                <div *ngIf="isNewsolicitud" class="messages">
+                  <mat-error *ngIf="!imgsolicitudField.value">
+                    Este campo es requerido
+                  </mat-error>
+                </div>
+                <img *ngIf="myimage" [src]="myimage" alt="" width="200px" height="200px"/>
+              </div>
+            </div>
+          </form>
+
+          <!--        end solicitud-->
+
+        </mat-card-content>
+        <mat-card-actions>
+          <mat-progress-bar *ngIf="hidebutoon && formsolicitud.valid"
+                            mode="indeterminate">
+          </mat-progress-bar>
+          <button *ngIf="!hidebutoon"
+                  mat-raised-button
+                  type="submit"
+                  class="blue-senamhi">
+            <span *ngIf="isNewsolicitud"> Solicitar</span>
+            <span *ngIf="!isNewsolicitud">Validar</span>
+          </button>
+          <button *ngIf="!hidebutoon"
+                  mat-raised-button
+                  type="button"
+                  (click)="rechazar()"
+                  class="brown-senamhi">
+            <span *ngIf="!isNewsolicitud">Rechazar</span>
+          </button>
+
+
+
+
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+</section>
+
+

@@ -1,0 +1,104 @@
+<section>
+  <br>
+  <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle mat-raised-button value="bold" class="blue-senamhi" routerLink="nuevo">
+      Nuevo registro
+      <fa-icon [icon]="faCircle"></fa-icon>
+    </mat-button-toggle>
+    <mat-button-toggle mat-raised-button (click)="exportExcel()" [disabled]="exceldisable" value="underline"
+                       class="blue-light-senamhi">
+      <span *ngIf="!exceldisable">
+              Exportar
+      </span>
+      <!--      <mat-icon class="setDefaultFontSetClass" *ngIf="!exceldisable">file-excel</mat-icon>-->
+      <fa-icon [icon]="faExcel"></fa-icon>
+      <span *ngIf="exceldisable"> Exportando ...</span>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+<section>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Listado de marcas</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <!--          <mat-label>Buscar</mat-label>-->
+        <input matInput (keyup)="applyFilter($event)" placeholder="BUSCAR" #input>
+      </mat-form-field>
+      <mat-progress-bar *ngIf="ressol" mode="indeterminate"></mat-progress-bar>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSortActive="id" id="tablemark" matSortDirection="desc" matSort>
+          <!-- Nro Column -->
+          <ng-container matColumnDef="nro">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nro</th>
+            <td mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </td>
+          </ng-container>
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          </ng-container>
+
+          <!-- Descripcion Column -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion</th>
+            <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
+          </ng-container>
+
+          <!-- Fecha de registro Column -->
+          <ng-container matColumnDef="fech_reg">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de registro</th>
+            <td mat-cell *matCellDef="let row">
+              {{row.fech_reg }}
+            </td>
+          </ng-container>
+
+          <!-- Estado Column -->
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let row">
+              <label *ngIf="row.estado === '1'" class="label label-warning">Activo</label>
+              <label *ngIf="row.estado === '0'" class="label label-brown">Inactivo</label>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                <button mat-mini-fab color="accent"
+                        #tooltip="matTooltip"
+                        matTooltip="Editar fila"
+                        [routerLink]="['editar',row.id]">
+                  <!--                  <mat-icon>edit</mat-icon>-->
+                  <fa-icon [icon]="faEditar"></fa-icon>
+                </button>
+                <button mat-mini-fab color="warn"
+                        #tooltip="matTooltip"
+                        matTooltip="Elimar fila"
+                        (click)="eliminar(row.id)">
+                  <!--                  <mat-icon>delete</mat-icon>-->
+                  <fa-icon [icon]="faEliminar"></fa-icon>
+                </button>
+              </mat-button-toggle-group>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+
+        <mat-paginator #paginator
+                       [length]="dataSource?.data.length"
+                       [pageIndex]="0"
+                       [pageSize]="10"
+                       [pageSizeOptions]="[5,10, 25, 50, 100, 250]">
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+
+

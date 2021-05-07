@@ -1,0 +1,35 @@
+<div *ngIf="!formrequest">
+  <app-estates-form
+    (create)="createEstateIntern($event)"
+    (update)="updateEstateIntern($event)"
+    (showmodels)="getmodelosporMarca($event)"
+    [listmarcas]="lismarcas"
+    [lismodelos]="lismodelos"
+    [lissedes]="lissedes"
+    [lissubcategory]="lissubcategorias"
+    [estatesIntern]="estatesIntern"
+    [disableSelect]="disableSelect"
+    [disableedit]="disableedit"
+    [cargaform]="cargaform"
+    [hidebutoon]="hidebutoon">
+  </app-estates-form>
+</div>
+<div *ngIf="formrequest">
+  <app-request-change-form
+    (showmodels)="getmodelosporMarca($event)"
+    (solicitud)="solicitudcambio($event)"
+    (validarsol)="aseptarsolicittud($event)"
+    [listmarcas]="lismarcas"
+    [lismodelos]="lismodelos"
+    [lissedes]="lissedes"
+    [lissubcategory]="lissubcategorias"
+    [estatesIntern]="estatesIntern"
+    [disableSelect]="disableSelect"
+    [disableedit]="disableedit"
+    [isNewsolicitud]="isNewsolicitud"
+    [datasolicitud]="datasolicitud"
+    [cargaform]="cargaform"
+    [hidebutoon]="hidebutoon">
+    >
+  </app-request-change-form>
+</div>

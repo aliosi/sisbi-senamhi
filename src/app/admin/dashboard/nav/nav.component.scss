@@ -1,0 +1,45 @@
+.sidenav-container {
+  height: 100%;
+  background-color: #f2f7fb;
+}
+
+.sidenav {
+ width: 200px;
+ background: #072343;
+}
+
+.mat-menu-content {
+  background: #072343;
+}
+
+.sidenav a {
+  color: white;
+
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+  color: white;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mat-toolbar.mat-primary {
+  background: white;
+  color: black;
+}
+
+.cursor{
+  cursor: pointer;
+  text-decoration:none;
+  color: black;
+  display: contents;
+
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
