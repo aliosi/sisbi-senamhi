@@ -23,5 +23,6 @@ export class routes_back {
   public static SISBI_LISTA_SOLICITUDES_USER_CAMBIOS_BIEN_SERVICE_API = `${environment.url_api}/sisbi_solicitud_cambio`;
   //Auth
   public static SISBI_AUTH_SERVICE_API=`${environment.url_api}/login`;
+  
 
 }
