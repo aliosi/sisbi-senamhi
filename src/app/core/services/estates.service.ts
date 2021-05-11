@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {routes_back} from '../../common/util/constants';
 import {EstateExternModel, EstateInternModel, EstatesExtern, EstatesIntern} from '../models/estate.model';
 import {Observable} from 'rxjs';
@@ -94,10 +94,14 @@ export class EstatesService {
   }
 
   updateEstatesSolicitudCambio(id: number, solicitud: Partial<EstateSolicitudItem>) {
-    return this.http.post<any>(`${routes_back.SISBI_SOLICITUD_CAMBIO_BIEN_SERVICE_API}/${id}`, solicitud);
+    let headers = new HttpHeaders();
+    headers = headers.set('token', localStorage.getItem('token'));
+    return this.http.post<any>(`${routes_back.SISBI_SOLICITUD_CAMBIO_BIEN_SERVICE_API}/${id}`, solicitud,{headers});
+
   }
 
-  updateEstatesSolicitudAceptacion(id: number, solicitud: Partial<EstateSolicitudItem>) {
+  /* updateEstatesSolicitudAceptacion(id: number, solicitud: Partial<EstateSolicitudItem>) { */
+  updateEstatesSolicitudAceptacion(id: number, solicitud: any) {
     return this.http.put<any>(`${routes_back.SISBI_SOLICITUD_CAMBIO_BIEN_SERVICE_API}/${id}`, solicitud);
   }
 

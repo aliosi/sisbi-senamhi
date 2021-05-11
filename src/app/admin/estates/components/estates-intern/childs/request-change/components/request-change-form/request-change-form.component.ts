@@ -83,7 +83,7 @@ export class RequestChangeFormComponent implements OnInit, AfterViewInit {
   @Input()
   set datasolicitud(data: EstateSolicitudItem) {
     if (data) {
-      console.log(data);
+      /* console.log(data); */
       this.formsolicitud.patchValue(data);
       this.cargaform = true;
       this.myimage = data.img.file;
@@ -148,30 +148,26 @@ export class RequestChangeFormComponent implements OnInit, AfterViewInit {
 
   save() {
     // console.log(this.isNewsolicitud);
-    this.hidebutoon = true;
+    /* this.hidebutoon = true; */
     if (this.formsolicitud.valid) {
       if (this.isNewsolicitud) {
+        this.codPatrisolicitudField.setValue(this.form.get('codPatrimonio').value);
+        this.descrpsolicitudField.setValue(this.form.get('descripcion').value);
         this.solicitud.emit(this.formsolicitud.value);
       } else {
-
-        // console.log('entra a validar');
         this.estadoSolicitud.setValue('1');
-        // this.imgsolicitudField.setValue('');
-        // console.log(this.formsolicitud.value);
         this.validarsol.emit(this.formsolicitud.value);
 
       }
     } else {
-
       this.hidebutoon = false;
       this.form.markAllAsTouched();
     }
   }
 
   rechazar() {
-    console.log('entra a rechazar');
+    /* this.hidebutoon = true; */
     this.estadoSolicitud.setValue('0');
-    console.log(this.formsolicitud.value);
     this.validarsol.emit(this.formsolicitud.value);
   }
 

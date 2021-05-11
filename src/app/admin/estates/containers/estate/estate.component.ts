@@ -34,6 +34,7 @@ export class EstateComponent implements OnInit {
   disableedit = false;
   formrequest = false;
   cargaform;
+  requestSolicitudcamb: any = {estado : null};
 
   constructor(
     private estateService: EstatesService,
@@ -182,7 +183,10 @@ export class EstateComponent implements OnInit {
       );
   }
 
+ 
+
   aseptarsolicittud(data) {
+    this.requestSolicitudcamb.estado = data.estado;
     swal({
       title: 'Estas seguro de realizar esta acción?',
       text: 'Alerta! una vez valida los datos de este bien serán actualizados',
@@ -191,11 +195,10 @@ export class EstateComponent implements OnInit {
     })
       .then((willDelete) => {
         if (willDelete) {
-          this.hidebutoon = true;
-          this.estateService.updateEstatesSolicitudAceptacion(this.datasolicitud.id, data)
+          /* this.hidebutoon = true; */
+          this.estateService.updateEstatesSolicitudAceptacion(data.id, this.requestSolicitudcamb)
             .subscribe(
               res => {
-                console.log(res);
                 this.datos = res;
                 if (this.datos.msg) {
                   this.router.navigate(['./admin/bienes/internos/solicitudes']);
