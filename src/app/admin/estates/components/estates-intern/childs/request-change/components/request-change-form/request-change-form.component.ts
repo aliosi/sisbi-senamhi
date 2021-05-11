@@ -83,7 +83,7 @@ export class RequestChangeFormComponent implements OnInit, AfterViewInit {
   @Input()
   set datasolicitud(data: EstateSolicitudItem) {
     if (data) {
-      // console.log(data);
+      console.log(data);
       this.formsolicitud.patchValue(data);
       this.cargaform = true;
       this.myimage = data.img.file;
@@ -142,7 +142,7 @@ export class RequestChangeFormComponent implements OnInit, AfterViewInit {
   }
 
   cargarmodelos() {
-    console.log(this.marcasolicitudField.value);
+    /* console.log(this.marcasolicitudField.value); */
     this.showmodels.emit(this.marcasolicitudField.value.id);
   }
 
@@ -276,11 +276,13 @@ export class RequestChangeFormComponent implements OnInit, AfterViewInit {
       fechaReg: [null],
       id: [null],
       img: [null, Validators.required],
-      marca: [null, Validators.required],
-      modelo: [null, Validators.required],
-      nSerie: [null, Validators.required],
+      marca: [null],
+      modelo: [null],
+      nSerie: [null],
       tel: [null],
-      user: [null]
+      user: [null],
+      descripcion: [null],
+      codPatrimonial: [null]
     });
   }
 
@@ -302,6 +304,14 @@ export class RequestChangeFormComponent implements OnInit, AfterViewInit {
 
   get nSeriesolicitudField() {
     return this.formsolicitud.get('nSerie');
+  }
+
+  get codPatrisolicitudField() {
+    return this.formsolicitud.get('codPatrimonial');
+  }
+
+  get descrpsolicitudField() {
+    return this.formsolicitud.get('descripcion');
   }
 
   get estadoSolicitud() {

@@ -18,9 +18,9 @@ import 'rxjs/add/operator/filter';
   styleUrls: ['./estates-list.component.scss']
 })
 export class EstatesListComponent implements AfterViewInit {
-  displayedColumns = ['nro', 'id', 'codpatrimonio', 'descripcion', 'fechAlta', 'fechMovimiento', 'fechNea', 'fechOrden'
-    , 'descmarca', 'descmodelo', 'nNea', 'nOrden', 'nSerie', 'descsede', 'descSubcategoria','color', 'acciones'];
-
+  /* displayedColumns = ['nro', 'id', 'codpatrimonio', 'descripcion', 'fechAlta', 'fechMovimiento', 'fechNea', 'fechOrden'
+    , 'descmarca', 'descmodelo', 'nNea', 'nOrden', 'nSerie', 'descsede', 'descSubcategoria','color', 'acciones']; */
+    displayedColumns = ['codpatrimonio', 'descripcion', 'descmarca', 'descmodelo', 'nSerie', 'descsede','acciones'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   dataSource: MatTableDataSource<EstateInternModel>;
   datos: any;

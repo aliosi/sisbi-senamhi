@@ -62,7 +62,7 @@ export class EstateComponent implements OnInit {
         this.getEstateIntern(params.creacion);
 
       } else if (params.validacion) {
-        console.log('entra a validacion');
+        /* console.log('entra a validacion'); */
         this.isNewsolicitud = false;
         this.formrequest = true;
         this.cargaform=false;
@@ -113,9 +113,9 @@ export class EstateComponent implements OnInit {
         res => {
           this.datosget = res.lista[0];
           this.disableSelect = false;
-          console.log('hola');
+          /* console.log('hola'); */
           this.estatesIntern = this.datosget;
-          console.log('--end');
+          /* console.log('--end'); */
           this.cargaform = true;
         }
       );
@@ -174,9 +174,7 @@ export class EstateComponent implements OnInit {
     this.estateService.getSolicitud(id)
       .subscribe(
         res => {
-          console.log('soli');
-          console.log(res);
-          console.log('end soli');
+          /* console.log(res.solicitud); */
           this.datasolicitud = res.solicitud;
 
           // console.log(res);

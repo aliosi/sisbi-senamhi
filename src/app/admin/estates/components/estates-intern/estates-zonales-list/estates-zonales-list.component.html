@@ -35,6 +35,11 @@
             <td mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </td>
           </ng-container>
           <!-- ID Column -->
+          <ng-container matColumnDef="codpatrimonio" style="width: 2px">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo patrimonial</th>
+            <td mat-cell *matCellDef="let row"> {{row.codPatrimonio}} </td>
+          </ng-container>
+
           <ng-container matColumnDef="sede">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> SEDE</th>
             <td mat-cell *matCellDef="let row"> {{row.descsede}} </td>
@@ -57,10 +62,7 @@
           <!--          </ng-container>-->
 
           <!-- Codigo patrimonial  -->
-          <ng-container matColumnDef="codpatrimonio" style="width: 2px">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Codigo patrimonial</th>
-            <td mat-cell *matCellDef="let row"> {{row.codPatrimonio}} </td>
-          </ng-container>
+          
 
           <!-- Descripcion Convenio -->
           <!--          <ng-container matColumnDef="convenio">-->

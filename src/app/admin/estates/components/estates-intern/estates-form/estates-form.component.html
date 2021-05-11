@@ -19,7 +19,7 @@
       <mat-card-content>
         <!-- Código Patrimonial Column -->
         <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
             <mat-form-field class="example-full-width">
               <input placeholder="Código Patrimonial" formControlName="codPatrimonio" matInput type="text">
               <div class="messages" *ngIf="codPatrimonioField.touched && codPatrimonioField.invalid">
@@ -29,11 +29,7 @@
               </div>
             </mat-form-field>
           </div>
-        </div>
-
-        <!-- Descipción Column -->
-        <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-8">
             <mat-form-field class="example-full-width">
               <input placeholder="Descipción" formControlName="descripcion" matInput type="text">
               <div class="messages" *ngIf="descripcionField.touched && descripcionField.invalid">
@@ -45,9 +41,12 @@
           </div>
         </div>
 
+        <!-- Descipción Column -->
+        
+
         <!-- Marca Column -->
         <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
             <mat-form-field>
               <mat-select placeholder="Marca"
                           formControlName="marca"
@@ -70,11 +69,7 @@
               </div>
             </mat-form-field>
           </div>
-        </div>
-
-        <!-- Modelo Column -->
-        <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
             <mat-form-field>
               <mat-select placeholder="Modelo"
                           [compareWith]="compareObjects"
@@ -96,11 +91,7 @@
               </div>
             </mat-form-field>
           </div>
-        </div>
-
-        <!-- nSerie Column -->
-        <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
             <mat-form-field class="example-full-width">
               <input placeholder="Numero de serie"
                      matInput type="text" formControlName="nSerie">
@@ -112,9 +103,10 @@
             </mat-form-field>
           </div>
         </div>
+
         <!-- nOrden Column -->
         <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
             <mat-form-field class="example-full-width">
               <input placeholder="Numero de orden"
                      formControlName="nOrden"
@@ -127,10 +119,7 @@
               </div>
             </mat-form-field>
           </div>
-        </div>
-        <!-- Fecha orden Column -->
-        <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
             <mat-form-field class="example-full-width">
               <input placeholder="Fecha de orden" formControlName="fechOrden" [disabled]="disableedit" matInput
                      type="date">
@@ -142,9 +131,10 @@
             </mat-form-field>
           </div>
         </div>
+        
         <!-- nNea Column -->
         <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
             <mat-form-field class="example-full-width">
               <input placeholder="Numero Nea"
                      formControlName="nNea"
@@ -158,10 +148,7 @@
               </div>
             </mat-form-field>
           </div>
-        </div>
-        <!-- Fecha nea Column -->
-        <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
             <mat-form-field class="example-full-width">
               <input placeholder="Fecha Nea" formControlName="fechNea" [disabled]="disableedit" matInput type="date">
               <div class="messages" *ngIf="fechNeaField.touched && fechNeaField.invalid">
@@ -172,13 +159,20 @@
             </mat-form-field>
           </div>
         </div>
+
         <!-- Subcategoría Column -->
         <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
+            <mat-form-field class="example-full-width">
+              <input [disabled]="true" placeholder="Mayor" value="{{mayor}}" matInput type="text">
+            </mat-form-field>
+          </div>
+          <div class="col-xs-4">
             <mat-form-field>
               <mat-select placeholder="Sub-categoría"
                           [compareWith]="compareObjects"
-                          formControlName="subCategoria">
+                          formControlName="subCategoria"
+                          (ngModelChange)="cargarMayor()">
                 <mat-select-filter [placeholder]="'Ingrese la subcategoría'"
                                    [displayMember]="'subCategoria'"
                                    [array]="subcategory"
@@ -195,7 +189,7 @@
 
         <!-- Sede Column -->
         <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
             <mat-form-field>
               <mat-select placeholder="Sede"
                           [compareWith]="compareObjects"
@@ -221,7 +215,7 @@
 
         <!-- Fecha de alta Column -->
         <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
             <mat-form-field class="example-full-width">
               <input placeholder="Fecha de alta" formControlName="fechAlta" [disabled]="disableedit" matInput
                      type="date">
@@ -232,10 +226,7 @@
               </div>
             </mat-form-field>
           </div>
-        </div>
-        <!-- Fecha movimiento Column -->
-        <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
             <mat-form-field class="example-full-width">
               <input placeholder="Fecha de movimiento" formControlName="fechMovimiento" [disabled]="disableedit"
                      matInput type="date">
@@ -246,10 +237,7 @@
               </div>
             </mat-form-field>
           </div>
-        </div>
-        <!-- Color-->
-        <div class="row">
-          <div class="col-xs">
+          <div class="col-xs-4">
             <mat-form-field class="example-full-width">
               <input placeholder="Color" formControlName="color"
                      matInput type="text">

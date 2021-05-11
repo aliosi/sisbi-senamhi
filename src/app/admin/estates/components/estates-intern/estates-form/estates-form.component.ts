@@ -17,6 +17,7 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./estates-form.component.scss']
 })
 export class EstatesFormComponent implements OnInit, AfterViewInit {
+  mayor: any;
   isNew = true;
   form: FormGroup;
   formsolicitud: FormGroup;
@@ -91,7 +92,7 @@ export class EstatesFormComponent implements OnInit, AfterViewInit {
 
       this.isNew = false;
       this.estate = data;
-
+      this.mayor = this.estate.subCategoria.mayor;
 
     }
   }
@@ -126,6 +127,10 @@ export class EstatesFormComponent implements OnInit, AfterViewInit {
     if (objmarca) {
       this.showmodels.emit(objmarca.id);
     }
+  }
+
+  cargarMayor(){
+    this.mayor = this.form.value.subCategoria.mayor;
   }
 
   save() {
@@ -229,6 +234,7 @@ export class EstatesFormComponent implements OnInit, AfterViewInit {
     return this.form.get('administrado');
   }
 
+  
   // get solicitudField() {
   //   return this.form.get('solicitud');
   // }

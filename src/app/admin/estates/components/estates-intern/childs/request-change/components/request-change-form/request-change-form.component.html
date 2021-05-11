@@ -29,36 +29,22 @@
             Para ello se comunicarán con usted.
           </p>
 
-          <div *ngIf="isNewsolicitud" class="row">
-            <div class="col-xs">
+          <div *ngIf="isNewsolicitud" class="row" style="padding-top: 30px;">
+            <div class="col-xs-4">
               <mat-form-field class="example-full-width">
                 <input matInput disabled placeholder="Codigo patrimonial" type="text"
                        [value]="codPatrimonioField.value">
               </mat-form-field>
             </div>
-          </div>
-
-
-          <!-- Descipción Column -->
-          <div *ngIf="isNewsolicitud" class="row">
-            <div class="col-xs">
+            <div class="col-xs-8">
               <mat-form-field class="example-full-width">
                 <input matInput disabled placeholder="Descipción" [value]="descripcionField.value">
               </mat-form-field>
             </div>
           </div>
 
-          <div *ngIf="isNewsolicitud" class="row">
-            <div class="col-xs">
-              <mat-form-field class="example-full-width">
-                <input matInput type="text" disabled placeholder="N° Serie actual" [value]="nSerieField.value">
-              </mat-form-field>
-            </div>
-          </div>
-
-          <!-- Marca Column -->
-          <div *ngIf="isNewsolicitud" class="row">
-            <div class="col-xs">
+          <div *ngIf="isNewsolicitud" class="row" style="padding-top: 30px;">
+            <div class="col-xs-4">
               <mat-form-field>
                 <mat-select placeholder="Marca actual"
                             formControlName="marca"
@@ -83,11 +69,7 @@
                 </div>
               </mat-form-field>
             </div>
-          </div>
-
-          <!-- Modelo Column -->
-          <div *ngIf="isNewsolicitud" class="row">
-            <div class="col-xs">
+            <div class="col-xs-4">
               <mat-form-field>
                 <mat-select placeholder="Modelo actual"
                             disabled
@@ -110,14 +92,35 @@
                 </div>
               </mat-form-field>
             </div>
+            <div class="col-xs-4">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" disabled placeholder="N° Serie actual" [value]="nSerieField.value">
+              </mat-form-field>
+            </div>
           </div>
+
+          
 
           <!--        Solicitud de cambio-->
           <!--        marca-->
 
-          <form class="example-form" [formGroup]="formsolicitud">
+          <form class="example-form" [formGroup]="formsolicitud" style="padding-top: 30px;">
+            <div *ngIf="!isNewsolicitud">
+              <div class="row">
+                <div class="col-xs-4">
+                  <mat-form-field class="example-full-width">
+                    <input matInput disabled placeholder="Cod Patrimonial" [value]="codPatrisolicitudField.value">
+                  </mat-form-field>
+                </div>
+                <div class="col-xs-8">
+                  <mat-form-field class="example-full-width">
+                    <input matInput disabled placeholder="Descipción" [value]="descrpsolicitudField.value">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
             <div class="row">
-              <div class="col-xs">
+              <div class="col-xs-4">
                 <mat-form-field>
                   <mat-select placeholder="Marca"
                               formControlName="marca"
@@ -127,25 +130,21 @@
                     <mat-select-filter [placeholder]="'Ingrese la marca'"
                                        [displayMember]="'descripcion'"
                                        [array]="marcas"
-
-                                       (filteredReturn)="filteredMarcas =$event"
+                                      (filteredReturn)="filteredMarcas =$event"
                     >
                     </mat-select-filter>
                     <mat-option *ngFor="let item of filteredMarcas" [value]="item">
                       {{item.descripcion}}
                     </mat-option>
                   </mat-select>
-                  <div class="messages" *ngIf="marcasolicitudField.touched && marcasolicitudField.invalid">
+                  <!-- <div class="messages" *ngIf="marcasolicitudField.touched && marcasolicitudField.invalid">
                     <mat-error *ngIf="marcasolicitudField.hasError('required')">
                       Este campo es requerido
                     </mat-error>
-                  </div>
+                  </div> -->
                 </mat-form-field>
               </div>
-            </div>
-            <!-- Modelo Column -->
-            <div class="row">
-              <div class="col-xs">
+              <div class="col-xs-4">
                 <mat-form-field>
                   <mat-select placeholder="Modelo"
                               [compareWith]="compareObjects"
@@ -161,37 +160,23 @@
                       {{item.descripcion}}
                     </mat-option>
                   </mat-select>
-                  <div class="messages" *ngIf="modelosolicitudField.touched && modelosolicitudField.invalid">
+                  <!-- <div class="messages" *ngIf="modelosolicitudField.touched && modelosolicitudField.invalid">
                     <mat-error *ngIf="modelosolicitudField.hasError('required')">
                       Este campo es requerido
                     </mat-error>
-                  </div>
+                  </div> -->
                 </mat-form-field>
               </div>
-            </div>
-
-            <!-- nSerie Column -->
-            <div *ngIf="isNewsolicitud" class="row">
-              <div class="col-xs">
+              <div class="col-xs-4">
                 <mat-form-field class="example-full-width">
                   <input placeholder="Numero de serie"
                          matInput type="text" formControlName="nSerie">
-                  <div class="messages" *ngIf="nSeriesolicitudField.touched && nSeriesolicitudField.invalid">
+                  <!-- <div class="messages" *ngIf="nSeriesolicitudField.touched && nSeriesolicitudField.invalid">
                     <mat-error *ngIf="nSeriesolicitudField.hasError('required')">
                       Este campo es requerido
                     </mat-error>
-                  </div>
+                  </div> -->
                 </mat-form-field>
-              </div>
-            </div>
-
-            <div *ngIf="!isNewsolicitud">
-              <div class="row">
-                <div class="col-xs">
-                  <mat-form-field class="example-full-width">
-                    <input matInput disabled placeholder="Descipción" [value]="nSeriesolicitudField.value">
-                  </mat-form-field>
-                </div>
               </div>
             </div>
             <!--        Comentario-->
