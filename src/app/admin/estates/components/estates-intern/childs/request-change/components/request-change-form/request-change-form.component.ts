@@ -153,6 +153,8 @@ export class RequestChangeFormComponent implements OnInit, AfterViewInit {
       if (this.isNewsolicitud) {
         this.codPatrisolicitudField.setValue(this.form.get('codPatrimonio').value);
         this.descrpsolicitudField.setValue(this.form.get('descripcion').value);
+        this.telfSolicitud.setValue(localStorage.getItem('telf'));
+        this.userSolicitud.setValue(localStorage.getItem('usuario'));
         this.solicitud.emit(this.formsolicitud.value);
       } else {
         this.estadoSolicitud.setValue('1');
@@ -312,6 +314,14 @@ export class RequestChangeFormComponent implements OnInit, AfterViewInit {
 
   get estadoSolicitud() {
     return this.formsolicitud.get('estado');
+  }
+
+  get telfSolicitud() {
+    return this.formsolicitud.get('tel');
+  }
+
+  get userSolicitud() {
+    return this.formsolicitud.get('user');
   }
 
 }

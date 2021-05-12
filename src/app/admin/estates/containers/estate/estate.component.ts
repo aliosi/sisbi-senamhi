@@ -167,7 +167,7 @@ export class EstateComponent implements OnInit {
             this.hidebutoon = true;
           }
         }
-      );
+      ); 
   }
 
   getsolicitudbyid(id) {

@@ -17,7 +17,8 @@ import {EstateSolicitudItem} from '../../../../../../../../core/models/estates-i
 })
 export class RequestChangeListComponent implements AfterViewInit {
 
-  displayedColumns = ['nro','idSolicitud', 'fech_regSolicitud', 'codPatrimonio', 'descripcion', 'nSerie', 'descsede', 'acciones'];
+  /* displayedColumns = ['nro','idSolicitud', 'fech_regSolicitud', 'codPatrimonio', 'descripcion', 'nSerie', 'descsede', 'acciones']; */
+  displayedColumns = ['fech_regSolicitud', 'codPatrimonio', 'descripcion', 'descsede','userSolicitud','telSolicitud', 'acciones'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   dataSource: MatTableDataSource<EstateSolicitudItem>;
   datos: any = {lista: '', msg: ''};
@@ -47,7 +48,7 @@ export class RequestChangeListComponent implements AfterViewInit {
     this.estatesService.getAllSolicitudes()
       .subscribe(res => {
           this.datos = res;
-          // console.log(this.datos);
+          /* console.log(this.datos); */
           this.dataSource = new MatTableDataSource(this.datos.lista);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
