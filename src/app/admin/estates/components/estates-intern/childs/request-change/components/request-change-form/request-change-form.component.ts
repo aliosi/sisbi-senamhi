@@ -83,7 +83,7 @@ export class RequestChangeFormComponent implements OnInit, AfterViewInit {
   @Input()
   set datasolicitud(data: EstateSolicitudItem) {
     if (data) {
-      // console.log(data);
+      /* console.log(data); */
       this.formsolicitud.patchValue(data);
       this.cargaform = true;
       this.myimage = data.img.file;
@@ -142,36 +142,34 @@ export class RequestChangeFormComponent implements OnInit, AfterViewInit {
   }
 
   cargarmodelos() {
-    console.log(this.marcasolicitudField.value);
+    /* console.log(this.marcasolicitudField.value); */
     this.showmodels.emit(this.marcasolicitudField.value.id);
   }
 
   save() {
     // console.log(this.isNewsolicitud);
-    this.hidebutoon = true;
+    /* this.hidebutoon = true; */
     if (this.formsolicitud.valid) {
       if (this.isNewsolicitud) {
+        this.codPatrisolicitudField.setValue(this.form.get('codPatrimonio').value);
+        this.descrpsolicitudField.setValue(this.form.get('descripcion').value);
+        this.telfSolicitud.setValue(localStorage.getItem('telf'));
+        this.userSolicitud.setValue(localStorage.getItem('usuario'));
         this.solicitud.emit(this.formsolicitud.value);
       } else {
-
-        // console.log('entra a validar');
         this.estadoSolicitud.setValue('1');
-        // this.imgsolicitudField.setValue('');
-        // console.log(this.formsolicitud.value);
         this.validarsol.emit(this.formsolicitud.value);
 
       }
     } else {
-
       this.hidebutoon = false;
       this.form.markAllAsTouched();
     }
   }
 
   rechazar() {
-    console.log('entra a rechazar');
+    /* this.hidebutoon = true; */
     this.estadoSolicitud.setValue('0');
-    console.log(this.formsolicitud.value);
     this.validarsol.emit(this.formsolicitud.value);
   }
 
@@ -276,11 +274,13 @@ export class RequestChangeFormComponent implements OnInit, AfterViewInit {
       fechaReg: [null],
       id: [null],
       img: [null, Validators.required],
-      marca: [null, Validators.required],
-      modelo: [null, Validators.required],
-      nSerie: [null, Validators.required],
+      marca: [null],
+      modelo: [null],
+      nSerie: [null],
       tel: [null],
-      user: [null]
+      user: [null],
+      descripcion: [null],
+      codPatrimonial: [null]
     });
   }
 
@@ -304,8 +304,24 @@ export class RequestChangeFormComponent implements OnInit, AfterViewInit {
     return this.formsolicitud.get('nSerie');
   }
 
+  get codPatrisolicitudField() {
+    return this.formsolicitud.get('codPatrimonial');
+  }
+
+  get descrpsolicitudField() {
+    return this.formsolicitud.get('descripcion');
+  }
+
   get estadoSolicitud() {
     return this.formsolicitud.get('estado');
+  }
+
+  get telfSolicitud() {
+    return this.formsolicitud.get('tel');
+  }
+
+  get userSolicitud() {
+    return this.formsolicitud.get('user');
   }
 
 }

@@ -34,6 +34,7 @@ export class EstateComponent implements OnInit {
   disableedit = false;
   formrequest = false;
   cargaform;
+  requestSolicitudcamb: any = {estado : null};
 
   constructor(
     private estateService: EstatesService,
@@ -62,7 +63,7 @@ export class EstateComponent implements OnInit {
         this.getEstateIntern(params.creacion);
 
       } else if (params.validacion) {
-        console.log('entra a validacion');
+        /* console.log('entra a validacion'); */
         this.isNewsolicitud = false;
         this.formrequest = true;
         this.cargaform=false;
@@ -113,9 +114,9 @@ export class EstateComponent implements OnInit {
         res => {
           this.datosget = res.lista[0];
           this.disableSelect = false;
-          console.log('hola');
+          /* console.log('hola'); */
           this.estatesIntern = this.datosget;
-          console.log('--end');
+          /* console.log('--end'); */
           this.cargaform = true;
         }
       );
@@ -166,7 +167,7 @@ export class EstateComponent implements OnInit {
             this.hidebutoon = true;
           }
         }
-      );
+      ); 
   }
 
   getsolicitudbyid(id) {
@@ -174,9 +175,7 @@ export class EstateComponent implements OnInit {
     this.estateService.getSolicitud(id)
       .subscribe(
         res => {
-          console.log('soli');
-          console.log(res);
-          console.log('end soli');
+          /* console.log(res.solicitud); */
           this.datasolicitud = res.solicitud;
 
           // console.log(res);
@@ -184,7 +183,10 @@ export class EstateComponent implements OnInit {
       );
   }
 
+ 
+
   aseptarsolicittud(data) {
+    this.requestSolicitudcamb.estado = data.estado;
     swal({
       title: 'Estas seguro de realizar esta acción?',
       text: 'Alerta! una vez valida los datos de este bien serán actualizados',
@@ -193,11 +195,10 @@ export class EstateComponent implements OnInit {
     })
       .then((willDelete) => {
         if (willDelete) {
-          this.hidebutoon = true;
-          this.estateService.updateEstatesSolicitudAceptacion(this.datasolicitud.id, data)
+          /* this.hidebutoon = true; */
+          this.estateService.updateEstatesSolicitudAceptacion(data.id, this.requestSolicitudcamb)
             .subscribe(
               res => {
-                console.log(res);
                 this.datos = res;
                 if (this.datos.msg) {
                   this.router.navigate(['./admin/bienes/internos/solicitudes']);

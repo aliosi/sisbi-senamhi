@@ -17,7 +17,8 @@ import {EstateInternModel} from '../../../../../core/models/estate.model';
   styleUrls: ['./estates-zonales-list.component.scss']
 })
 export class EstatesZonalesListComponent implements AfterViewInit {
-  displayedColumns = ['nro', 'sede', 'marca', 'modelo', 'codpatrimonio', 'descripcion', 'nSerie', 'estado', 'acciones'];
+  /* displayedColumns = ['nro', 'sede', 'marca', 'modelo', 'codpatrimonio', 'descripcion', 'nSerie', 'estado', 'acciones']; */
+  displayedColumns = ['codpatrimonio','descripcion','marca', 'modelo','sede', 'nSerie', 'estado', 'acciones'];
 
   columnsToDisplay: string[] = this.displayedColumns.slice();
   dataSource: MatTableDataSource<EstateInternModel>;

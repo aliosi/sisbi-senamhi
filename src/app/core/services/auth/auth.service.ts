@@ -44,6 +44,7 @@ export class AuthService {
           // console.log(resp);
           localStorage.setItem('token', resp.token);
           localStorage.setItem('nombre', resp.nombre);
+          localStorage.setItem('telf', resp.tel);
           //21,Administrador
           // 22,Patrimonio
           // 23,Zonal

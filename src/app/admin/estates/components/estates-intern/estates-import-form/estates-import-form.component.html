@@ -4,6 +4,10 @@
       <span>Registro masivo</span>
     </mat-card-title>
   </mat-card-header>
+  <button mat-icon-button type="button"
+          class="atras" (click)="retornar()">
+    <fa-icon [icon]="faArrowLeft" size="2x"></fa-icon>
+  </button>
   <form class="example-form" [formGroup]="formulario">
     <mat-card-content>
       <div class="row">

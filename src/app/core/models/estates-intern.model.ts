@@ -70,6 +70,7 @@ export class EstateSolicitudItem {
   nSerie: string;
   tel: string;
   user: string;
+  codPatrimonial: string;
 }
 
 export class EstateSolicitudModel {

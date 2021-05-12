@@ -6,6 +6,7 @@ import {VenuesItem} from '../../../../../core/models/venues.model';
 import {EstatesService} from '../../../../../core/services/estates.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import {faArrowAltCircleLeft, faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-estates-import-form',
@@ -19,6 +20,7 @@ export class EstatesImportFormComponent implements OnInit {
   formmodelo: FormGroup;
   formsede: FormGroup;
   formsubCategoria: FormGroup;
+  faArrowLeft = faArrowAltCircleLeft;
   lista: any[] = [];
   hidebutoon = new FormControl(false);
   datos: any = {lista: '', msg: '', error: ''};
@@ -302,6 +304,10 @@ export class EstatesImportFormComponent implements OnInit {
 
   get inputfileformulatio() {
     return this.formulario.get('inputfile');
+  }
+
+  retornar() {
+    this.router.navigate(['./admin/bienes/internos']);
   }
 
 
