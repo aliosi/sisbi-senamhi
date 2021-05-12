@@ -24,7 +24,6 @@ import {EstatesImportFormComponent} from './estates-import-form/estates-import-f
 import {RequestChangeUserListComponent} from './childs/request-change/components/request-change-user-list/request-change-user-list.component';
 import {EstatesZonalesListComponent} from './estates-zonales-list/estates-zonales-list.component';
 
-
 @NgModule({
   declarations: [
     EstatesListComponent,

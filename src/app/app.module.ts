@@ -20,6 +20,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {LayoutModule} from '@angular/cdk/layout';
 import { DatePipe } from '@angular/common';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 @NgModule({
@@ -44,7 +46,7 @@ import { DatePipe } from '@angular/common';
     MatIconModule,
     MatButtonModule,
     LayoutModule,
-
+    MatDialogModule
 
   ],
   providers: [
