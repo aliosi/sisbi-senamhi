@@ -23,6 +23,10 @@ export class routes_back {
   public static SISBI_LISTA_SOLICITUDES_USER_CAMBIOS_BIEN_SERVICE_API = `${environment.url_api}/sisbi_solicitud_cambio`;
   //Auth
   public static SISBI_AUTH_SERVICE_API=`${environment.url_api}/login`;
+  //Inventario
+  public static SISBI_ANIOS_INV_API = `${environment.url_api}/sisbi_inventario/anio`;
+  public static SISBI_SEDE_USER_API = `${environment.url_api}/sisbi_inventario/sede`;
+  public static SISBI_INV_SEDE_API = `${environment.url_api}/sisbi_inventario/`;
   
 
 }
