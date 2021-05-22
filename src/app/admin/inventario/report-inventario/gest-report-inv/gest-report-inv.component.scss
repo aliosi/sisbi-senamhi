@@ -6,7 +6,6 @@
 table{
     width: 100%;
    }
-   
 .mat-column-AnioInv {
     justify-content: center;
     width: 5%;
@@ -20,20 +19,6 @@ table{
     -webkit-hyphens: auto;
     hyphens: auto;
 }
-
-.mat-column-codInv {
-    justify-content: center;
-    width: 10%;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-
-    word-break: break-word;
-
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-  }
 
   .mat-column-CodPat {
     justify-content: center;
@@ -114,20 +99,4 @@ table{
     -webkit-hyphens: auto;
     hyphens: auto;
   }
-  .mat-column-accion {
-    justify-content: center;
-    width: 10%;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-
-    word-break: break-word;
-
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-  }
-
-  mat-header-cell {
-    justify-content: center;
-  }
+  

@@ -1,0 +1,100 @@
+<div style="padding-left: 50px;padding-top: 100px;padding-right: 50px;">
+    <div style="border-style: groove;" class="fondo">
+        <h1 style="padding-left: 10px;"> Búsqueda </h1>
+        <form [formGroup]="seachForm" style="padding-top: 20px;padding-left: 20px;padding-bottom: 20px;">
+            <div class="row">
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <mat-label>Sede </mat-label>
+                    <mat-select formControlName="cmbSede">
+                      <mat-option *ngFor="let s of sedesList" [value]="s.id">
+                        {{s.descripcion}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                    <mat-form-field >
+                    <input matInput formControlName="txtCod" placeholder="Codigo patrimonial" type="text">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-2" style="text-align: center;">
+                    <button mat-raised-button color="primary" 
+                    (click)="searchInvSede()">Buscar</button>
+                </div>
+              </div>
+          </form>
+    </div>
+
+    <section style="padding-top: 20px;"  *ngIf="seeTable">
+      <mat-card>
+        <mat-card-header >
+            <div class="row" style="padding-bottom: 15px;padding-left: 5px;">
+              
+            </div>
+        </mat-card-header>
+        <mat-card-content  >
+          <!-- <mat-form-field>-->
+            <!--          <mat-label>Buscar</mat-label>-->
+            <!-- <input matInput (keyup)="applyFilter($event)" placeholder="BUSCAR" #input> -->
+          <!-- </mat-form-field>-->
+          <div class="mat-elevation-z8" >
+            <table mat-table [dataSource]="dataSource" matSortActive="id" id="tablemark" matSortDirection="desc" matSort>
+              
+              <!--          idSolicitud-->
+              <ng-container matColumnDef="CodPat">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Código Patrimonial </th>
+                <td mat-cell *matCellDef="let row"> {{row.codPatrimonio}} </td>
+              </ng-container>
+    
+              <!--          fech_regSolicitud-->
+              <ng-container matColumnDef="descBien">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción</th>
+                <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
+              </ng-container>
+    
+              <!-- ID Column -->
+              <ng-container matColumnDef="marc">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Marca</th>
+                <td mat-cell *matCellDef="let row"> {{row.marca.descripcion}} </td>
+              </ng-container>
+    
+              <!-- Descripcion Column -->
+              <ng-container matColumnDef="modelo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Modelo</th>
+                <td mat-cell *matCellDef="let row"> {{row.modelo.descripcion}} </td>
+              </ng-container>
+    
+              <!-- Numero de serie Column -->
+              <ng-container matColumnDef="sede">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sede</th>
+                <td mat-cell *matCellDef="let row">
+                  {{row.sede.descripcion }}
+                </td>
+              </ng-container>
+    
+              <!-- Sede Column -->
+              <ng-container matColumnDef="nSerie">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nro. Serie</th>
+                <td mat-cell *matCellDef="let row">
+                  {{row.nSerie }}
+                </td>
+              </ng-container>
+    
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+              </tr>
+            </table>
+    
+            <mat-paginator #paginator
+                           [length]="dataSource?.data.length"
+                           [pageIndex]="0"
+                           [pageSize]="10"
+                           [pageSizeOptions]="[10,10, 25, 50, 100, 250]">
+            </mat-paginator>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </section>
+
+</div>

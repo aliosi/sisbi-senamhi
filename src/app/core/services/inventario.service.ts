@@ -26,16 +26,37 @@ export class InventarioService {
   }
 
   getInvSede(data:any)  {
-
     if(data.cod){
       return this.http.get<any>(`${routes_back.SISBI_INV_SEDE_API}?anio=${data.anio}&sede=${data.sede}&codPatri=${data.cod}`);
     }else{
       return this.http.get<any>(`${routes_back.SISBI_INV_SEDE_API}?anio=${data.anio}&sede=${data.sede}`);
     }
-    
   }
 
-  
+  getReportInv(data:any)  {
+    if(data.cod){
+      return this.http.get<any>(`${routes_back.SISBI_REPORT_INV_API}?anio=${data.anio}&sede=${data.sede}&codPatri=${data.cod}`);
+    }else{
+      return this.http.get<any>(`${routes_back.SISBI_REPORT_INV_API}?anio=${data.anio}&sede=${data.sede}`);
+    }
+  }
+
+  getReportConfi(data:any){
+    if(data.cod){
+      return this.http.get<any>(`${routes_back.SISBI_REPORT_CONF_API}?sede=${data.sede}&codPatri=${data.cod}`);
+    }else{
+      return this.http.get<any>(`${routes_back.SISBI_REPORT_CONF_API}?sede=${data.sede}`);
+    }
+  }
+
+  getReportSin(data:any){
+    if(data.cod){
+      return this.http.get<any>(`${routes_back.SISBI_REPORT_SIN_API}?sede=${data.sede}&codPatri=${data.cod}`);
+    }else{
+      return this.http.get<any>(`${routes_back.SISBI_REPORT_SIN_API}?sede=${data.sede}`);
+    }
+  }
+
 
 }
 

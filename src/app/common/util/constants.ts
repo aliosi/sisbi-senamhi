@@ -27,6 +27,10 @@ export class routes_back {
   public static SISBI_ANIOS_INV_API = `${environment.url_api}/sisbi_inventario/anio`;
   public static SISBI_SEDE_USER_API = `${environment.url_api}/sisbi_inventario/sede`;
   public static SISBI_INV_SEDE_API = `${environment.url_api}/sisbi_inventario/`;
+  public static SISBI_REPORT_INV_API = `${environment.url_api}/sisbi_inventario/report1`;
+  public static SISBI_REPORT_CONF_API = `${environment.url_api}/sisbi_inventario/report2`;
+  public static SISBI_REPORT_SIN_API = `${environment.url_api}/sisbi_inventario/report3`;
+  
   
 
 }

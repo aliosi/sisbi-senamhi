@@ -70,7 +70,7 @@
         <span> Inventario</span>
       </a>
       <mat-menu #menu1="matMenu">
-        <button  mat-menu-item routerLink="registroInv">
+        <button *ngIf="rol==23 || rol==21" mat-menu-item routerLink="registroInv">
           <span class="material-icons">
           post_add
           </span>

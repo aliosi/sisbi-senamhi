@@ -3,37 +3,30 @@ import {InventarioService} from '../../../../core/services/inventario.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
-import {faFileExcel, faPlusCircle, faEdit, faTrashAlt, faAddressCard} from '@fortawesome/free-solid-svg-icons';
-
-
 
 @Component({
-  selector: 'app-gest-registro',
-  templateUrl: './gest-registro.component.html',
-  styleUrls: ['./gest-registro.component.scss']
+  selector: 'app-gest-report-inv',
+  templateUrl: './gest-report-inv.component.html',
+  styleUrls: ['./gest-report-inv.component.scss']
 })
-export class GestRegistroComponent implements OnInit {
+export class GestReportInvComponent implements OnInit {
 
   sedesList = [];
   aniosList:any;
   sedeUserList:any;
-  
-  seeTable:any = false;
-  faEditar = faEdit;
-  faEliminar = faTrashAlt;
+
   seachForm:FormGroup;
-  displayedColumns = ['codInv', 'AnioInv', 'CodPat', 'descBien','estadoInv','opeInv', 'UbiInv', 'RespInv', 'accion'];
+  displayedColumns = ['AnioInv', 'CodPat', 'descBien','estadoInv','opeInv', 'UbiInv', 'RespInv'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
+  seeTable:any = false;
   dataSource: MatTableDataSource<any>;
-  
   constructor(
     private inventarioService: InventarioService,
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar
-  ) { 
+  ) {
     this.buildForm();
-
-  }
+   }
 
   ngOnInit(): void {
     this.getSedes();
@@ -41,19 +34,10 @@ export class GestRegistroComponent implements OnInit {
   }
 
   getSedes(){
-    this.getSedeUser().then(()=>
-          this.inventarioService.getSedes()
-            .subscribe(res=>{
-              for (let i = 0; i < this.sedeUserList.length; i++) {
-                for (let f = 0; f < res.listSede.length; f++) {
-                  if(this.sedeUserList[i].estado==res.listSede[f].id){
-                    this.sedesList.push(res.listSede[f]);
-                  }
-                }
-                
-              }
-          })
-        );
+    this.inventarioService.getSedes()
+      .subscribe(res=>{
+        this.sedesList=res.listSede;
+    })
   }
 
   getAnios(){
@@ -61,17 +45,6 @@ export class GestRegistroComponent implements OnInit {
       .subscribe(res=>{
         this.aniosList = res.lista;
       })
-  }
-
-  getSedeUser(){
-    let promise = new Promise((resolve, reject) => {
-      this.inventarioService.getSedeInv(localStorage.getItem('usuario'))
-        .subscribe(res=>{
-          this.sedeUserList = res.lista;
-          resolve(this.sedeUserList);
-        })    
-    });
-    return promise;      
   }
 
   buildForm(){
@@ -101,7 +74,7 @@ export class GestRegistroComponent implements OnInit {
       cod : fcod==''?null:fcod
     }
 
-    this.inventarioService.getInvSede(data)
+    this.inventarioService.getReportInv(data)
       .subscribe(res=>{
         this.seeTable = false;
         if(res.lista.length>0){
@@ -111,7 +84,7 @@ export class GestRegistroComponent implements OnInit {
           this.snackbar(res.msg);
         }
         
-      })    
+      })   
   }
 
   snackbar(msj:any){
@@ -122,7 +95,5 @@ export class GestRegistroComponent implements OnInit {
       
     });
   }
-
-  //getInvSede
 
 }
