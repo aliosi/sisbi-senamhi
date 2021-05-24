@@ -30,7 +30,9 @@ export class routes_back {
   public static SISBI_REPORT_INV_API = `${environment.url_api}/sisbi_inventario/report1`;
   public static SISBI_REPORT_CONF_API = `${environment.url_api}/sisbi_inventario/report2`;
   public static SISBI_REPORT_SIN_API = `${environment.url_api}/sisbi_inventario/report3`;
-  
-  
+  public static SISBI_ESTADO_INV_API = `${environment.url_api}/sisbi_inventario/estado`;
+  public static SISBI_INSERT_INVI_API = `${environment.url_api}/sisbi_inventario/`;
+  public static SISBI_IMPORT_INVI_API = `${environment.url_api}/sisbi_inventario/import`;
+
 
 }

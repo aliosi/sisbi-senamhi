@@ -4,7 +4,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
 import {faFileExcel, faPlusCircle, faEdit, faTrashAlt, faAddressCard} from '@fortawesome/free-solid-svg-icons';
-
+import {MatDialog} from '@angular/material/dialog'
+import {ImportarComponent} from './importar/importar.component'
 
 
 @Component({
@@ -25,11 +26,13 @@ export class GestRegistroComponent implements OnInit {
   displayedColumns = ['codInv', 'AnioInv', 'CodPat', 'descBien','estadoInv','opeInv', 'UbiInv', 'RespInv', 'accion'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   dataSource: MatTableDataSource<any>;
+  cacheSearch:any=null;
   
   constructor(
     private inventarioService: InventarioService,
     private formBuilder: FormBuilder,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog:MatDialog
   ) { 
     this.buildForm();
 
@@ -105,6 +108,7 @@ export class GestRegistroComponent implements OnInit {
       .subscribe(res=>{
         this.seeTable = false;
         if(res.lista.length>0){
+          this.cacheSearch = data;
           this.seeTable = true;  
           this.dataSource = new MatTableDataSource(res.lista);
         }else{
@@ -121,6 +125,42 @@ export class GestRegistroComponent implements OnInit {
       verticalPosition: 'top',
       
     });
+  }
+
+  openNuevo(accion:any,inve:any=null){
+    let request = {
+                    cabecera : accion==1?'NUEVO REGISTRO':accion==2?'EDITAR REGISTRO':'ELIMINAR REGISTRO',
+                    ope : accion,
+                    entity : inve
+                  }
+    let w = '1100px';
+    let h = '470px';
+    if(accion == 3){
+      w = '600px';
+      h = '200px';
+    }
+
+    const dialoRef = this.dialog.open(ImportarComponent,{
+      width: w,
+      height : h,
+      data: request
+    });
+    dialoRef.afterClosed().subscribe(res=>{
+      if(res==true){
+        if(this.cacheSearch!=null){
+          this.inventarioService.getInvSede(this.cacheSearch)
+          .subscribe(res=>{
+            this.seeTable = false;
+            if(res.lista.length>0){
+              this.seeTable = true;  
+              this.dataSource = new MatTableDataSource(res.lista);
+            }
+          }) 
+        }
+      }
+      
+        }
+    )
   }
 
   //getInvSede

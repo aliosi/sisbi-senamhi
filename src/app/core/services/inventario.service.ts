@@ -57,6 +57,25 @@ export class InventarioService {
     }
   }
 
+  getEstadoInv(){
+    return this.http.get<any>(routes_back.SISBI_ESTADO_INV_API);
+  }
+
+  postInventario(ope:any,data:any){
+    
+    if(ope==1){
+      return this.http.post<any>(routes_back.SISBI_INSERT_INVI_API, data);
+    }else if(ope==2){
+      return this.http.put<any>(routes_back.SISBI_INSERT_INVI_API, data);
+    }else{
+      return this.http.delete<any>(`${routes_back.SISBI_INSERT_INVI_API}?sede=${data.lista[0].sede.id}&codPat=${data.lista[0].bien.codPatrimonio}`, data);
+    }
+    
+  }
+
+  importInve(data:any){
+    return this.http.post<any>(routes_back.SISBI_IMPORT_INVI_API, data);
+  }
 
 }
 

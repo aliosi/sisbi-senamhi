@@ -16,13 +16,17 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { MatCardModule } from '@angular/material/card';
+//import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {MatDialogModule} from '@angular/material/dialog'
+
 
 import { RegistroRoutingModule } from './registro-routing.module';
 import { GestRegistroComponent } from './gest-registro/gest-registro.component';
+import { ImportarComponent } from './gest-registro/importar/importar.component';
 
 
 @NgModule({
-  declarations: [GestRegistroComponent],
+  declarations: [GestRegistroComponent, ImportarComponent],
   imports: [
     CommonModule,
     RegistroRoutingModule,
@@ -41,7 +45,10 @@ import { GestRegistroComponent } from './gest-registro/gest-registro.component';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCardModule
-  ]
+    MatCardModule,
+   // BrowserAnimationsModule,
+    MatDialogModule
+  ],
+  entryComponents : [ImportarComponent]
 })
 export class RegistroModule { }
