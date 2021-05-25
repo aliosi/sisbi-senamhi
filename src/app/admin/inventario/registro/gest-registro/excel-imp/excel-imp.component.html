@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Importacion de Inventario</h1>
+<div mat-dialog-content style="padding-bottom: 10px;">
+    <form [formGroup]="formGest" >
+        <div class="row">
+            <div class="col-md-12">
+              <mat-form-field>
+                <mat-label>Sede </mat-label>
+                <mat-select formControlName="cmbSede">
+                  <mat-option *ngFor="let s of sedesList" [value]="s.id">
+                    {{s.descripcion}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row" style="padding-top: 20px;">
+            <div class="col-md-12">
+                <mat-label>Archivo excel:</mat-label>
+                <br>
+                <div class="button-wrapper">
+                  <button mat-raised-button>
+                    <mat-icon>folder</mat-icon>
+                    Seleccione un archivo
+                  </button>
+                  <span>{{namefile}}</span>
+                  <input
+                    (change)="onFileChange($event)"
+                    formControlName="inputfile"
+                    id="upload-file"
+                    name="file"
+                    class="file-archivo"
+                    type="file"
+                    accept=".xlsx, .xls ">
+      
+                </div>
+            </div>
+          </div>
+    </form>
+</div>
+<div mat-dialog-actions >
+    <div class="row" style="text-align:center;">
+        <button mat-button (click)="onClick()" cdkFocusInitial>Guardar</button>
+        <button mat-button (click)="onNoClick()">Cancelar</button>
+    </div>
+    
+</div>

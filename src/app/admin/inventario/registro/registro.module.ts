@@ -23,10 +23,11 @@ import {MatDialogModule} from '@angular/material/dialog'
 import { RegistroRoutingModule } from './registro-routing.module';
 import { GestRegistroComponent } from './gest-registro/gest-registro.component';
 import { ImportarComponent } from './gest-registro/importar/importar.component';
+import { ExcelImpComponent } from './gest-registro/excel-imp/excel-imp.component';
 
 
 @NgModule({
-  declarations: [GestRegistroComponent, ImportarComponent],
+  declarations: [GestRegistroComponent, ImportarComponent, ExcelImpComponent],
   imports: [
     CommonModule,
     RegistroRoutingModule,
@@ -49,6 +50,6 @@ import { ImportarComponent } from './gest-registro/importar/importar.component';
    // BrowserAnimationsModule,
     MatDialogModule
   ],
-  entryComponents : [ImportarComponent]
+  entryComponents : [ImportarComponent,ExcelImpComponent]
 })
 export class RegistroModule { }

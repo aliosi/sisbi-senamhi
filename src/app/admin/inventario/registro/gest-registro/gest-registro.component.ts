@@ -6,6 +6,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {faFileExcel, faPlusCircle, faEdit, faTrashAlt, faAddressCard} from '@fortawesome/free-solid-svg-icons';
 import {MatDialog} from '@angular/material/dialog'
 import {ImportarComponent} from './importar/importar.component'
+import {ExcelImpComponent} from './excel-imp/excel-imp.component';
 
 
 @Component({
@@ -159,7 +160,30 @@ export class GestRegistroComponent implements OnInit {
         }
       }
       
+      }
+    )
+  }
+
+  openImport(){
+    const dialoRef = this.dialog.open(ExcelImpComponent,{
+      width: '400px',
+      height : '320px',
+      data: null
+    });
+    dialoRef.afterClosed().subscribe(res=>{
+        if(res==true){
+          if(this.cacheSearch!=null){
+            this.inventarioService.getInvSede(this.cacheSearch)
+            .subscribe(res=>{
+              this.seeTable = false;
+              if(res.lista.length>0){
+                this.seeTable = true;  
+                this.dataSource = new MatTableDataSource(res.lista);
+              }
+            }) 
+          }
         }
+      }
     )
   }
 
