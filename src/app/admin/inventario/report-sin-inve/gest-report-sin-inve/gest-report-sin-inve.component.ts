@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {InventarioService} from '../../../../core/services/inventario.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+
 
 @Component({
   selector: 'app-gest-report-sin-inve',
@@ -18,6 +21,8 @@ export class GestReportSinInveComponent implements OnInit {
   displayedColumns = ['CodPat', 'descBien','marc','modelo', 'sede', 'nSerie'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
   dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(
     private inventarioService: InventarioService,
     private formBuilder: FormBuilder,
@@ -85,10 +90,11 @@ export class GestReportSinInveComponent implements OnInit {
         if(res.lista.length>0){
           this.seeTable = true;  
           this.dataSource = new MatTableDataSource(res.lista);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
         }else{
           this.snackbar(res.msg);
         }
-        
       })    
   }
 
