@@ -27,7 +27,6 @@ export class NavComponent {
     // console.log('entra a header');
     this.nombre = localStorage.getItem('nombre');
     this.rol = localStorage.getItem('roles');
-    console.log(this.rol);
     // console.log(this.user.nombre);
   }
 

@@ -13,6 +13,5 @@ export class DashboardComponent {
 
   constructor(private breakpointObserver: BreakpointObserver) {
     this.rol = localStorage.getItem('roles');
-    console.log(this.rol);
   }
 }

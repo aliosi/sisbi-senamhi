@@ -48,6 +48,34 @@ const routes: Routes = [{
       },
     },
     {
+      path: 'registroInv',
+      loadChildren: () => {
+        return import('./inventario/registro/registro.module')
+          .then(m => m.RegistroModule);
+      },
+    },
+    {
+      path: 'reportInv',
+      loadChildren: () => {
+        return import('./inventario/report-inventario/report-inventario.module')
+          .then(m => m.ReportInventarioModule);
+      },
+    },
+    {
+      path: 'reportConflicInv',
+      loadChildren: () => {
+        return import('./inventario/report-conflicto/report-conflicto.module')
+          .then(m => m.ReportConflictoModule);
+      },
+    },
+    {
+      path: 'reportSinInv',
+      loadChildren: () => {
+        return import('./inventario/report-sin-inve/report-sin-inve.module')
+          .then(m => m.ReportSinInveModule);
+      },
+    },
+    {
       path: '',
       component: DashboardComponent
     },

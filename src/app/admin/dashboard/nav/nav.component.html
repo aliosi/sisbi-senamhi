@@ -63,6 +63,38 @@
           <span>Lista de modelos</span>
         </button>
       </mat-menu>
+      <a mat-menu-item [matMenuTriggerFor]="menu1">
+        <span class="material-icons">
+          store
+        </span>
+        <span> Inventario</span>
+      </a>
+      <mat-menu #menu1="matMenu">
+        <button *ngIf="rol==23 || rol==21" mat-menu-item routerLink="registroInv">
+          <span class="material-icons">
+          post_add
+          </span>
+          <span>Registro</span>
+        </button>
+        <button  *ngIf="rol==22 || rol==21" mat-menu-item routerLink="reportInv">
+          <span class="material-icons">
+            file_present
+          </span>
+          <span>Reporte Inventario</span>
+        </button>
+        <button mat-menu-item routerLink="reportConflicInv">
+          <span class="material-icons">
+            file_present
+          </span>
+          <span>Reporte bienes con conflicto</span>
+        </button>
+        <button mat-menu-item routerLink="reportSinInv">
+          <span class="material-icons">
+            file_present
+          </span>
+          <span>Reporte bienes sin inventario</span>
+        </button>
+      </mat-menu>
 <!--      <a mat-menu-item [matMenuTriggerFor]="menuaudi">-->
 <!--        <span class="material-icons">-->
 <!--        admin_panel_settings-->

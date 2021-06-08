@@ -23,6 +23,16 @@ export class routes_back {
   public static SISBI_LISTA_SOLICITUDES_USER_CAMBIOS_BIEN_SERVICE_API = `${environment.url_api}/sisbi_solicitud_cambio`;
   //Auth
   public static SISBI_AUTH_SERVICE_API=`${environment.url_api}/login`;
-  
+  //Inventario
+  public static SISBI_ANIOS_INV_API = `${environment.url_api}/sisbi_inventario/anio`;
+  public static SISBI_SEDE_USER_API = `${environment.url_api}/sisbi_inventario/sede`;
+  public static SISBI_INV_SEDE_API = `${environment.url_api}/sisbi_inventario/`;
+  public static SISBI_REPORT_INV_API = `${environment.url_api}/sisbi_inventario/report1`;
+  public static SISBI_REPORT_CONF_API = `${environment.url_api}/sisbi_inventario/report2`;
+  public static SISBI_REPORT_SIN_API = `${environment.url_api}/sisbi_inventario/report3`;
+  public static SISBI_ESTADO_INV_API = `${environment.url_api}/sisbi_inventario/estado`;
+  public static SISBI_INSERT_INVI_API = `${environment.url_api}/sisbi_inventario/`;
+  public static SISBI_IMPORT_INVI_API = `${environment.url_api}/sisbi_inventario/import`;
+
 
 }
